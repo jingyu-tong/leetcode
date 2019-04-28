@@ -1,4 +1,1 @@
 # Top Interview Questions
-
-
-
