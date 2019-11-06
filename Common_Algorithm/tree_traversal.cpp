@@ -105,6 +105,7 @@ public:
         TreeNode* last = root;
         while(!s.empty()) {
             TreeNode* cur = s.top();
+            //leaf or visited its children
             if((!cur->left && !cur->right) || last == cur->left || last == cur->right) {
                 ans.push_back(cur->val);
                 s.pop();
