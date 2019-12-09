@@ -36,4 +36,4 @@ private:
     bool isNum(const char& ch) {
         return ch <= '9' && ch >= '0';
     }
-};
+}; 
