@@ -9,7 +9,7 @@ public:
         //next[i] means [0, needle[i]) == [i - needle[i], i)
         //next[i] = needle[t] == needle[i] ? t + 1;
         //if != t = next[i]
-        vector<int> next(m, 0);
+        vector<int> next(m, -1);
         next[0] = -1; //用来后移
         int i = 0; //main
         int t = -1; //mode

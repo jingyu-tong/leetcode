@@ -1,24 +1,52 @@
+// heap O(nlogk)
 class Solution {
 public:
     ListNode* mergeKLists(vector<ListNode*>& lists) {
-        if(lists.size() == 0) return {};
+        auto cmp = [](ListNode* a, ListNode* b) { return a->val > b->val; };
+        priority_queue<ListNode*, vector<ListNode*>, decltype(cmp)> q(cmp);
+
+        // ???
+        for (auto& list : lists) {
+            if (list) q.push(list);
+        }
+
+        // ??
+        ListNode dummy(0);
+        ListNode* cur = &dummy;
+        while (!q.empty()) {
+            auto t = q.top();
+            q.pop();
+            if (t->next) q.push(t->next);
+            cur->next = t;
+            cur = cur->next;
+        }
+        return dummy.next;
+    }
+};
+
+// mergesort
+class Solution {
+public:
+    ListNode* mergeKLists(vector<ListNode*>& lists) {
+        if (lists.size() == 0) return {};
         int n = lists.size();
-        while(n > 1) {
+        while (n > 1) {
             int mid = (n + 1) / 2;
-            for(int i = 0; i < n / 2; ++i) {
+            for (int i = 0; i < n / 2; ++i) {
                 lists[i] = mergeTwoLists(lists[i], lists[i + mid]);
             }
             n = mid;
         }
         return lists[0];
     }
+
 private:
-	//利用21题
+    //利用21题
     ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
         ListNode dummy(0);
         ListNode* head = &dummy;
-        while(l1 && l2) {
-            if(l1->val > l2->val) {
+        while (l1 && l2) {
+            if (l1->val > l2->val) {
                 head->next = l2;
                 head = head->next;
                 l2 = l2->next;

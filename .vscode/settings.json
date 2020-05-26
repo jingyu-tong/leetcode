@@ -1,6 +1,15 @@
 {
     "go.inferGopath": false,
     "files.associations": {
-        "bitset": "cpp"
+        "bitset": "cpp",
+        "vector": "cpp",
+        "iosfwd": "cpp",
+        "iterator": "cpp",
+        "__split_buffer": "cpp",
+        "array": "cpp",
+        "deque": "cpp",
+        "queue": "cpp",
+        "string": "cpp",
+        "string_view": "cpp"
     }
 }
