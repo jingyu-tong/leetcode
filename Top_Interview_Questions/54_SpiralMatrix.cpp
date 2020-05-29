@@ -1,46 +1,20 @@
-/*
-**根据方向，每次访问后，减小该维度的规模
-*/
 class Solution {
 public:
     vector<int> spiralOrder(vector<vector<int>>& matrix) {
-        if(matrix.empty() || matrix[0].empty()) return {};
-        vector<int> ans;
-        
-        int dir = 0;// 0 行，1 列
-        int up_down = 0; // 0 +, 1 -
-        int x = 0, y = 0;
-        int nx = matrix.size(), ny = matrix[0].size();
-        while(nx > 0 && ny > 0) {
-            int n = dir == 0 ? ny : nx;
-            for(int i = 0; i < n; ++i) {
-                if(dir == 0 && up_down == 0)
-                    y += 1;
-                else if(dir == 0 && up_down == 1)
-                    y -= 1;
-                else if(dir == 1 && up_down == 0) 
-                    x += 1;
-                else
-                    x -= 1;
-                ans.push_back(matrix[x][y - 1]);
-            }
-            if(dir == 0 && up_down == 0) {
-                --nx;
-                dir = 1;
-            }   
-            else if(dir == 0 && up_down == 1) {
-                --nx;
-                dir = 1;
-            } else if(dir == 1 && up_down == 0) {
-                --ny;
-                dir = 0;
-                up_down = 1;
-            } else {
-                --ny;
-                dir = 0;
-                up_down = 0;
-            }         
+        if (matrix.empty() || matrix[0].empty()) return {};
+        int m = matrix.size(), n = matrix[0].size();
+        vector<int> res;
+        int up = 0, down = m - 1, left = 0, right = n - 1;
+        while (true) {
+            for (int j = left; j <= right; ++j) res.push_back(matrix[up][j]);
+            if (++up > down) break;
+            for (int i = up; i <= down; ++i) res.push_back(matrix[i][right]);
+            if (--right < left) break;
+            for (int j = right; j >= left; --j) res.push_back(matrix[down][j]);
+            if (--down < up) break;
+            for (int i = down; i >= up; --i) res.push_back(matrix[i][left]);
+            if (++left > right) break;
         }
-        return ans;
+        return res;
     }
 };
