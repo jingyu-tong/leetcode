@@ -1,68 +1,32 @@
-/*
-**最一般的版本，每次都要求最小值 196ms
-*/
 class MinStack {
 public:
     /** initialize your data structure here. */
-    MinStack() {
-        
-    }
-    
+    MinStack() {}
+
     void push(int x) {
-        ele_.push_back(x);
+        s1_.push(x);
+        if (s2_.empty() || x <= s2_.top()) s2_.push(x);
     }
-    
+
     void pop() {
-        ele_.pop_back();
-        
+        if (s1_.top() == s2_.top()) s2_.pop();
+        s1_.pop();
     }
-    
-    int top() {
-        return ele_.back();
-    }
-    
-    int getMin() {
-        return *min_element(ele_.begin(), ele_.end());
-    }
+
+    int top() { return s1_.top(); }
+
+    int getMin() { return s2_.top(); }
+
 private:
-    int num_;
-    vector<int> ele_;
-    
+    stack<int> s1_;  // 全部元素
+    stack<int> s2_;  // 最小元素
 };
-/*
-**可以在出栈入栈时更新最小值
-*/
-class MinStack {
-public:
-    /** initialize your data structure here. */
-    MinStack() {
-        min_ = INT_MAX;
-    }
-    
-    void push(int x) {
-        ele_.push_back(x);
-        min_ = min(x, min_);
-    }
-    
-    void pop() {
-        if(ele_.size() > 1)
-            min_ = *min_element(ele_.begin(), ele_.end() - 1);
-        else 
-            min_ = INT_MAX;
-        ele_.pop_back();
-        
-    }
-    
-    int top() {
-        return ele_.back();
-    }
-    
-    int getMin() {
-        return min_;
-    }
-private:
-    int min_;
-    int num_;
-    vector<int> ele_;
-    
-};
+
+/**
+ * Your MinStack object will be instantiated and called as such:
+ * MinStack* obj = new MinStack();
+ * obj->push(x);
+ * obj->pop();
+ * int param_3 = obj->top();
+ * int param_4 = obj->getMin();
+ */
