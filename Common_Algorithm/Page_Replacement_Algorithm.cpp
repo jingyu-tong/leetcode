@@ -102,5 +102,5 @@ public:
     int capacity_;
     int min_freq_;
     unordered_map<int, CacheNode> mem_; //key, node
-    unordered_map<int, list<int>> l_;//freq, key
+    unordered_map<int, list<int>> l_; // freq, key_list
 };

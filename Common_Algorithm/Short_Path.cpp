@@ -93,7 +93,7 @@ public:
     int networkDelayTime(vector<vector<int>>& times, int N, int K) {
         vector<int> dist(N + 1, INT_MAX);
         dist[K] = 0;
-        for(int i = 1; i <= N; ++i) {
+        for(int i = 1; i <= dp[N]; ++i) {
             for(const auto& time : times) {
                 int u = time[0];
                 if(dist[u] == INT_MAX) continue;

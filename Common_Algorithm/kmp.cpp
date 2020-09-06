@@ -7,7 +7,7 @@ public:
         if(n < m) return -1;
         //calculate next vector
         //next[i] means [0, needle[i]) == [i - needle[i], i)
-        //next[i] = needle[t] == needle[i] ? t + 1;
+        //needle[i] = needle[t] == needle[i] ? t + 1;
         //if != t = next[i]
         vector<int> next(m, -1);
         next[0] = -1; //用来后移
